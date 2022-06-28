@@ -70,4 +70,28 @@ class PhoneNumberTest extends TestCase
 
             ]);
     }
+
+    public function test_update_phone_number()
+    {
+        $number = \Propaganistas\LaravelPhone\PhoneNumber::make($this->faker->e164PhoneNumber, "EU")->formatE164();
+        $response = $this->put('api/v1/phoneNumbers/' . PhoneNumber::first()->id, [
+            "number" => $number
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure(
+            [
+                "status",
+                "data" => [
+                    "id",
+                    "number"
+                ],
+                "code"
+
+
+            ]);
+        $this->assertDatabaseHas('phone_numbers', [
+            "number" => $number
+        ]);
+    }
 }

@@ -3,12 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Enums\OrderStatusEnum;
-use App\Enums\OrderSubscriptionTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use JetBrains\PhpStorm\ArrayShape;
 
-class UpdateOrderSubscriptionRequest extends FormRequest
+class UpdatePhoneNumberRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +24,11 @@ class UpdateOrderSubscriptionRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(["type" => "array", "subscribed" => "string[]"])]
+    #[ArrayShape(["number" => "string[]"])]
     public function rules(): array
     {
         return [
-            "type" => ['required', 'string', new Enum(OrderSubscriptionTypeEnum::class)],
-            "subscribed" => ['required', 'boolean'],
+            "number" => ['required', 'string', 'phone:AUTO'],
         ];
     }
 }

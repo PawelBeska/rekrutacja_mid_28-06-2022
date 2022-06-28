@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use App\Enums\OrderStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 
 class UpdateOrderRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class UpdateOrderRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +25,9 @@ class UpdateOrderRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    #[Pure]
+    #[ArrayShape(["status" => "array"])]
+    public function rules(): array
     {
         return [
             "status" => ['required', 'string', new Enum(OrderStatusEnum::class)],
