@@ -49,7 +49,7 @@ services:
       SERVICE_NAME: mysql
       SERVICE_TAGS: dev
     volumes:
-      - ./docker/mysql/auth:/var/lib/mysql
+      - ./docker/mysql/orders_db:/var/lib/mysql
   redis:
     image: redis
     container_name: redis

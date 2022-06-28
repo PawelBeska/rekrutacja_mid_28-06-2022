@@ -30,3 +30,4 @@ docker/mongo/
 docker/mysql/notification
 apps/notification/.editorconfig
 apps/notification/.styleci.yml
+/docker/mysql/orders_db/
