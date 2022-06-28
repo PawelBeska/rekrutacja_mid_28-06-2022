@@ -1,1 +1,50 @@
-<p align="center"><img src="https://socialify.git.ci/PawelBeska/Laravel-microservices/image?description=1&descriptionEditable=Project%20for%20testing%20and%20learning%20microservices%20pattern.&font=Source%20Code%20Pro&logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F9%2F9a%2FLaravel.svg%2F1200px-Laravel.svg.png&owner=1&pattern=Circuit%20Board&theme=Dark" alt="project-image"></p>
+## Projekt rekrutacyjny
+
+### Stanowisko PHP Mid Developer
+
+### Firma:
+
+ - 
+
+### Data rozpoczęcia:
+
+28.06.2022
+
+### Data zakończenia:
+
+28.06.2022
+
+### Wynik rekrutacji:
+
+-
+
+### Instalacja
+
+Zmiana nazwy pliku z .env.example do .env (apps/orders/.env.example)
+
+Uruchomienie komendy <code>docker-compose build</code>
+
+Uruchomienie komendy <code>docker-compose up -d</code>
+
+Uruchomienie komendy <code>docker exec -it orders_service bash</code>
+
+Uruchomienie komendy <code>composer update</code>
+
+Uruchomienie komendy <code>php artisan key:generate</code>
+
+Uruchomienie komendy <code>php artisan migrate</code>
+
+### Uruchomienie
+
+Uruchomienie komendy <code>docker-compose up -d</code>
+
+### Testy:
+
+Uruchomienie komendy <code>docker-compose up -d</code>
+
+<code>php artisan test</code>
+
+
+### Dokumentacja:
+
+- 
