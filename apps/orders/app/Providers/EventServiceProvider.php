@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\OrderChangedStatusEvent;
+use App\Listeners\OrderChangedStatusListener;
+use App\Models\Order;
+use App\Observers\OrderObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,17 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        OrderChangedStatusEvent::class => [
+            OrderChangedStatusListener::class,
+        ],
+
     ];
 
-    /**
-     * Register any events for your application.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
 
     /**
      * Determine if events and listeners should be automatically discovered.
@@ -39,4 +38,13 @@ class EventServiceProvider extends ServiceProvider
     {
         return false;
     }
+
+    /**
+     * The model observers for your application.
+     *
+     * @var array
+     */
+    protected $observers = [
+        Order::class => [OrderObserver::class],
+    ];
 }
