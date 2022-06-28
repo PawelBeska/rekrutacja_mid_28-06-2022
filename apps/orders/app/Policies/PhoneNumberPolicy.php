@@ -13,10 +13,10 @@ class PhoneNumberPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User|null $user
      * @return bool
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -24,11 +24,11 @@ class PhoneNumberPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\PhoneNumber  $phoneNumber
+     * @param \App\Models\User|null $user
+     * @param \App\Models\PhoneNumber $phoneNumber
      * @return bool
      */
-    public function view(User $user, PhoneNumber $phoneNumber): bool
+    public function view(?User $user, PhoneNumber $phoneNumber): bool
     {
         return true;
     }
@@ -36,22 +36,22 @@ class PhoneNumberPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User|null $user
      * @return bool
      */
-    public function create(User $user): bool
+    public function create(?User $user): bool
     {
-              return true;
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\PhoneNumber  $phoneNumber
+     * @param \App\Models\User|null $user
+     * @param \App\Models\PhoneNumber $phoneNumber
      * @return bool
      */
-    public function update(User $user, PhoneNumber $phoneNumber): bool
+    public function update(?User $user, PhoneNumber $phoneNumber): bool
     {
         return true;
     }
@@ -59,11 +59,11 @@ class PhoneNumberPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\PhoneNumber  $phoneNumber
+     * @param \App\Models\User|null $user
+     * @param \App\Models\PhoneNumber $phoneNumber
      * @return bool
      */
-    public function delete(User $user, PhoneNumber $phoneNumber): bool
+    public function delete(?User $user, PhoneNumber $phoneNumber): bool
     {
         return true;
     }

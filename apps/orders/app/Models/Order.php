@@ -27,7 +27,7 @@ class Order extends Model
     {
         parent::boot();
 
-        static::created(function (Order $order) {
+        static::creating(function (Order $order) {
             $order->update([
                 'tracking_number' => generateTrackingNumber()
             ]);
@@ -50,8 +50,8 @@ class Order extends Model
     protected function trackingNumber(): Attribute
     {
         return Attribute::Make(
-            get: static fn($value) => "GK" . Str::padLeft($value, "9", "0"),
-            set: static fn($value) => (int) Str::padLeft(preg_replace('/\D/', '', $value), "9", "0")
+            get: static fn($value) => $value,
+            set: static fn($value) => "GK" . Str::padLeft(preg_replace('/\D/', '', $value), "9", "0")
         );
     }
 

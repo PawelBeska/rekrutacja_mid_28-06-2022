@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 function generateTrackingNumber()
 {
-    if ($latest_order = Order::query()->latest('created_at')->first()) {
+    if ($latest_order = Order::query()->latest("id")->first()) {
         return (int)preg_replace('/\D/', '', $latest_order->tracking_number) + 1;
     }
     return 1;

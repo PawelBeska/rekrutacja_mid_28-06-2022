@@ -18,8 +18,8 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'status'=>$this->faker->randomElement(OrderStatusEnum::cases())->value,
-
+            'status' => $this->faker->randomElement(OrderStatusEnum::cases())->value,
+            'tracking_number' => generateTrackingNumber()
         ];
     }
 }

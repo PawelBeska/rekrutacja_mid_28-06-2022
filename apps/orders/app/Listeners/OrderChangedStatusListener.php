@@ -31,7 +31,9 @@ class OrderChangedStatusListener
     public function handle(OrderChangedStatusEvent $event): void
     {
         try {
-            $this->sendMessageRequest->send($event->order);
+
+            ray($event->order->subscriptions()->where('subscribed',true)->get())->green();
+            $this->sendMessageRequest->send();
         } catch (Exception $e) {
             //
         }

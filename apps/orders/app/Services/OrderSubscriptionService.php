@@ -2,15 +2,18 @@
 
 namespace App\Services;
 
+use App\Enums\OrderSubscriptionTypeEnum;
 use App\Interfaces\SubscribableInterface;
 use App\Models\Order;
 use App\Models\OrderSubscription;
 use App\Models\PhoneNumber;
 
-class OrderSubscriptionService{
+class OrderSubscriptionService
+{
     public function __construct(
         private OrderSubscription $orderSubscription = new OrderSubscription()
-    ){
+    )
+    {
     }
 
     /**
@@ -22,12 +25,16 @@ class OrderSubscriptionService{
     }
 
     public function assignData(
-        Order $order,
-        SubscribableInterface $subscribable,
-    ):static
+        Order                     $order,
+        SubscribableInterface     $subscribable,
+        OrderSubscriptionTypeEnum $type,
+        bool                      $subscribed,
+    ): static
     {
         $this->orderSubscription->order()->associate($order);
         $this->orderSubscription->subscribable()->associate($subscribable);
+        $this->orderSubscription->type = $type;
+        $this->orderSubscription->subscribed = $subscribed;
         $this->orderSubscription->save();
         return $this;
     }

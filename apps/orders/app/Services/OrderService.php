@@ -13,15 +13,24 @@ class OrderService
     {
     }
 
+    /**
+     * @return \App\Models\Order
+     */
     public function getOrder(): Order
     {
         return $this->order;
     }
 
+    /**
+     * @param \App\Enums\OrderStatusEnum $status
+     * @return $this
+     */
     public function assignData(
         OrderStatusEnum $status,
-    )
+    ): static
     {
-
+        $this->order->status = $status;
+        $this->order->save();
+        return $this;
     }
 }

@@ -6,6 +6,8 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\PhoneNumberCollection;
+use App\Http\Resources\PhoneNumberResource;
 use App\Models\Order;
 use App\Models\PhoneNumber;
 use Illuminate\Http\JsonResponse;
@@ -13,11 +15,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class PhoneNumbersController  extends Controller
+class PhoneNumbersController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(PhoneNumber::class, 'order');
+        $this->authorizeResource(PhoneNumber::class, 'phoneNumber');
     }
 
     /**
@@ -26,10 +28,14 @@ class PhoneNumbersController  extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        $data = $request->validate([
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
+        ]);
+
         try {
             return $this->successResponse(
-                new \App\Http\Resources\OrderCollection(
-                    Order::paginate(Arr::get($request->all(), 'per_page', 15))
+                new PhoneNumberCollection(
+                    PhoneNumber::paginate(Arr::get($data, 'per_page', 15))
                 )
             );
         } catch (\Exception $e) {
@@ -40,15 +46,14 @@ class PhoneNumbersController  extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Order $order
+     * @param \App\Models\PhoneNumber $phoneNumber
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Request $request, Order $order): JsonResponse
+    public function show(Request $request, PhoneNumber $phoneNumber): JsonResponse
     {
         try {
-            $order->load(['subscriptions', 'subscriptions.subscribable']);
             return $this->successResponse(
-                new OrderResource($order)
+                new PhoneNumberResource($phoneNumber)
             );
         } catch (\Exception $e) {
             $this->reportError($e);
@@ -56,13 +61,5 @@ class PhoneNumbersController  extends Controller
         }
     }
 
-    /**
-     * @param \App\Http\Requests\UpdateOrderRequest $request
-     * @param \App\Models\Order $order
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(UpdateOrderRequest $request, Order $order): JsonResponse
-    {
 
-    }
 }
